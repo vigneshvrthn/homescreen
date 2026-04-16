@@ -315,12 +315,14 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Text(
                                       "Security Services",
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 18,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -365,9 +367,11 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Text(
-                                      "Security Services",
+                                      "HouseKeeping Services",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,
@@ -393,7 +397,7 @@ class HomeScreen extends StatelessWidget {
                                   },
                                   blendMode: BlendMode.dstIn,
                                   child: Image.asset(
-                                    "assets/security.jpeg",
+                                    "assets/hk.jpeg",
                                     fit: BoxFit.fill,
                                   ),
                                 ),
