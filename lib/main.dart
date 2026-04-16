@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -144,26 +146,26 @@ class HomeScreen extends StatelessWidget {
 
                             Row(
                               children: [
-                                const SizedBox(width: 110),
-
-                                SizedBox(
-                                  height: 35,
-                                  width: 200,
-                                  child: Card(
-                                    color: const Color.fromARGB(
-                                      255,
-                                      74,
-                                      173,
-                                      197,
-                                    ),
-                                    elevation: 5,
-                                    child: const Center(
-                                      child: Text(
-                                        "Explore Security Services",
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
+                                Expanded(
+                                  child: SizedBox(
+                                    height: 35,
+                                    width: 200,
+                                    child: Card(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        74,
+                                        173,
+                                        197,
+                                      ),
+                                      elevation: 5,
+                                      child: const Center(
+                                        child: Text(
+                                          "Explore Security Services",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -172,24 +174,26 @@ class HomeScreen extends StatelessWidget {
 
                                 const SizedBox(width: 25),
 
-                                SizedBox(
-                                  height: 35,
-                                  width: 265,
-                                  child: Card(
-                                    color: const Color.fromARGB(
-                                      255,
-                                      74,
-                                      173,
-                                      197,
-                                    ),
-                                    elevation: 5,
-                                    child: const Center(
-                                      child: Text(
-                                        "Explore HouseKeeping Services",
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
+                                Expanded(
+                                  child: SizedBox(
+                                    height: 35,
+                                    width: 265,
+                                    child: Card(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        74,
+                                        173,
+                                        197,
+                                      ),
+                                      elevation: 5,
+                                      child: const Center(
+                                        child: Text(
+                                          "Explore HouseKeeping Services",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -213,7 +217,7 @@ class HomeScreen extends StatelessWidget {
                                 Colors.black,
                                 Colors.black,
                               ],
-                              stops: [0.0, 0.2, 1.0],
+                              stops: [0.0, 0.3, 1.0],
                             ).createShader(bounds);
                           },
                           blendMode: BlendMode.dstIn,
@@ -238,27 +242,46 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           SizedBox(width: 15),
                           Expanded(
-                            child: _card("Immediate Manpower Replacement"),
+                            child: _card(
+                              "Immediate Manpower Replacement",
+                              Icons.repeat_sharp,
+                            ),
                           ),
                           SizedBox(width: 15),
-                          Expanded(child: _card("Verified Staff")),
+                          Expanded(
+                            child: _card(
+                              "Verified Staff",
+                              Icons.verified_outlined,
+                            ),
+                          ),
                           SizedBox(width: 15),
-                          Expanded(child: _card("24/7 Support")),
+                          Expanded(
+                            child: _card("24/7 Support", Icons.alarm_outlined),
+                          ),
                           SizedBox(width: 15),
                         ],
                       ),
                       Row(
                         children: [
                           SizedBox(width: 15),
-                          Expanded(child: _card("Rapid Responce Team")),
+                          Expanded(
+                            child: _card(
+                              "Rapid Responce Team",
+                              Icons.people_alt_outlined,
+                            ),
+                          ),
                           SizedBox(width: 15),
                           Expanded(
-                            child: _card("Uniformed & Disciplined Presence"),
+                            child: _card(
+                              "Uniformed & Disciplined Presence",
+                              Icons.shield_outlined,
+                            ),
                           ),
                           SizedBox(width: 15),
                           Expanded(
                             child: _card(
                               "Specialized In Hospital & Industrial Cleaning",
+                              Icons.clean_hands,
                             ),
                           ),
                           SizedBox(width: 15),
@@ -266,6 +289,122 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                SizedBox(height: 60),
+                Center(
+                  child: Text(
+                    "Our Services",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromARGB(255, 22, 81, 129),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 45),
+                Row(
+                  children: [
+                    Expanded(flex: 1, child: Card()),
+                    Expanded(
+                      flex: 4,
+                      child: SizedBox(
+                        height: 350,
+                        child: Card(
+                          color: const Color.fromARGB(255, 70, 158, 230),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Security Services",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: ShaderMask(
+                                  shaderCallback: (Rect bounds) {
+                                    return const LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        Colors.transparent,
+                                        Colors.black,
+                                        Colors.black,
+                                      ],
+                                      stops: [0.0, 0.3, 1.0],
+                                    ).createShader(bounds);
+                                  },
+                                  blendMode: BlendMode.dstIn,
+                                  child: Image.asset(
+                                    "assets/security.jpeg",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Expanded(flex: 1, child: Card()),
+                    Expanded(
+                      flex: 4,
+                      child: SizedBox(
+                        height: 350,
+                        child: Card(
+                          color: const Color.fromARGB(255, 122, 216, 240),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Security Services",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: ShaderMask(
+                                  shaderCallback: (Rect bounds) {
+                                    return const LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        Colors.transparent,
+                                        Colors.black,
+                                        Colors.black,
+                                      ],
+                                      stops: [0.0, 0.3, 1.0],
+                                    ).createShader(bounds);
+                                  },
+                                  blendMode: BlendMode.dstIn,
+                                  child: Image.asset(
+                                    "assets/security.jpeg",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(flex: 1, child: Card()),
+                  ],
                 ),
               ],
             ),
@@ -280,7 +419,7 @@ class HomeScreen extends StatelessWidget {
       height: 150,
       child: Card(
         elevation: 5,
-        color: Colors.white30,
+        color: Colors.white70,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
