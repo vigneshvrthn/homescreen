@@ -190,7 +190,7 @@ class HomeScreen extends StatelessWidget {
                                           ),
                                           elevation: 5,
                                           child: Text(
-                                            "Explore HouseKeeping Services",
+                                            "Explore  Services",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: 15,
