@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home/home.dart';
+import 'package:home/projectpageweb.dart';
 
 void main() {
   runApp(const MyApp());
@@ -111,8 +112,8 @@ class Home extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     HomeScreen(),
-                    const Center(child: Text("About Us Page")),
-                    const Center(child: Text("Projects Page")),
+                    const Center(child: Text("About Us")),
+                    ProjectPage(),
                     const Center(child: Text("Contact Page")),
                   ],
                 ),
