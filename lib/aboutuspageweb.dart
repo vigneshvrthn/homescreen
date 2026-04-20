@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:website/projectpageweb.dart';
+import 'package:home/projectpageweb.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
@@ -7,7 +7,6 @@ class AboutUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("SRINACSS ENVIRO PRIVATE LIMITED")),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -182,9 +181,7 @@ class AboutUsPage extends StatelessWidget {
                               backgroundColor: Colors.black,
                               child: CircleAvatar(
                                 radius: 125,
-                                backgroundImage: AssetImage(
-                                  "assets/images/MD PP.jpg",
-                                ),
+                                backgroundImage: AssetImage("assets/MD PP.jpg"),
                               ),
                             ),
                             Text(
