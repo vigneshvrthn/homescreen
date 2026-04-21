@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home/aboutuspageweb.dart';
+import 'package:home/contactuspageweb.dart';
 import 'package:home/home.dart';
 import 'package:home/projectpageweb.dart';
 
@@ -115,7 +116,7 @@ class Home extends StatelessWidget {
                     HomeScreen(),
                     AboutUsPage(),
                     ProjectPage(),
-                    const Center(child: Text("Contact Page")),
+                    ContactUsPage(),
                   ],
                 ),
               ),
