@@ -3,6 +3,7 @@ import 'package:home/aboutuspageweb.dart';
 import 'package:home/contactuspageweb.dart';
 import 'package:home/home.dart';
 import 'package:home/projectpageweb.dart';
+import 'package:home/quotepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -82,20 +83,26 @@ class Home extends StatelessWidget {
                       ),
                     ),
 
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
+                    InkWell(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Quotepage()),
                       ),
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 10, 118, 145),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Text(
-                        "Get Quote",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 10, 118, 145),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Text(
+                          "Get Quote",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -116,7 +123,7 @@ class Home extends StatelessWidget {
                     HomeScreen(),
                     AboutUsPage(),
                     ProjectPage(),
-                    Contactuspageweb(),
+                    ContactUsPage(),
                   ],
                 ),
               ),
