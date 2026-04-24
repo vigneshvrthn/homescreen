@@ -30,88 +30,92 @@ class ContactUsPage extends StatelessWidget {
     String? locationText,
     String? locationUrl,
   }) {
-    return SizedBox(
-      width: 300,
-      child: Card(
-        elevation: 5,
-        color: Colors.purple[100],
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Image.asset(image, height: 150),
-              const SizedBox(height: 10),
+    return Expanded(
+      child: SizedBox(
+        width: 300,
+        child: Card(
+          elevation: 5,
+          color: Colors.purple[100],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Image.asset(image, height: 150),
+                const SizedBox(height: 10),
 
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
 
-              Text(
-                subtitle,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-
-              const SizedBox(height: 10),
-
-              InkWell(
-                onTap: () => _callNumber(number),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.call, color: Colors.green),
-                    const SizedBox(width: 20),
-                    Text(
-                      number,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                Text(
+                  subtitle,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-              ),
 
-              const SizedBox(height: 10),
+                const SizedBox(height: 10),
 
-              InkWell(
-                onTap: () => _openWhatsapp("91$number"),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.message, color: Colors.green, size: 35),
-                    SizedBox(width: 12),
-                    const Text(
-                      "Chat Us...",
-                      style: TextStyle(fontSize: 22, color: Colors.black54),
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 10),
-
-              if (locationText != null && locationUrl != null)
                 InkWell(
-                  onTap: () => _openLocation(locationUrl),
+                  onTap: () => _callNumber(number),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.location_on, color: Colors.blue),
-                      SizedBox(width: 10),
+                      const Icon(Icons.call, color: Colors.green),
+                      const SizedBox(width: 20),
                       Text(
-                        locationText,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        number,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
-            ],
+
+                const SizedBox(height: 10),
+
+                InkWell(
+                  onTap: () => _openWhatsapp("91$number"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.message, color: Colors.green, size: 35),
+                      SizedBox(width: 12),
+                      const Text(
+                        "Chat Us...",
+                        style: TextStyle(fontSize: 22, color: Colors.black54),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                if (locationText != null && locationUrl != null)
+                  InkWell(
+                    onTap: () => _openLocation(locationUrl),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.location_on, color: Colors.blue),
+                        SizedBox(width: 10),
+                        Text(
+                          locationText,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),
@@ -121,15 +125,12 @@ class ContactUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Wrap(
-            spacing: 20,
-            runSpacing: 20,
-            alignment: WrapAlignment.center,
-            children: [
-              contactCard(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Row(
+          children: [
+            Expanded(
+              child: contactCard(
                 title: "N. GANESAN",
                 subtitle: "GENERAL MANAGER",
                 number: "8220042006",
@@ -140,8 +141,10 @@ class ContactUsPage extends StatelessWidget {
                 locationUrl:
                     "https://www.google.com/maps/place/NACSS/@9.926487,78.1522909,17z",
               ),
+            ),
 
-              contactCard(
+            Expanded(
+              child: contactCard(
                 title: "Madurai Head Office",
                 subtitle: "",
                 number: "8220042007",
@@ -152,8 +155,10 @@ class ContactUsPage extends StatelessWidget {
                 locationUrl:
                     "https://www.google.com/maps/place/NACSS/@9.926487,78.1522909,17z",
               ),
+            ),
 
-              contactCard(
+            Expanded(
+              child: contactCard(
                 title: "Chennai Office",
                 subtitle: "",
                 number: "8220042008",
@@ -164,8 +169,8 @@ class ContactUsPage extends StatelessWidget {
                 locationUrl:
                     "https://www.google.com/maps/place/Chromepet,+Chennai",
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -24,7 +24,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         body: SafeArea(
           child: Column(
@@ -79,31 +79,11 @@ class Home extends StatelessWidget {
                           Tab(icon: Icon(Icons.info_outline), text: "About"),
                           Tab(icon: Icon(Icons.work), text: "Projects"),
                           Tab(icon: Icon(Icons.contact_phone), text: "Contact"),
-                        ],
-                      ),
-                    ),
-
-                    InkWell(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Quotepage()),
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 10, 118, 145),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: const Text(
-                          "Get Quote",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                          Tab(
+                            icon: Icon(Icons.blinds_closed_sharp),
+                            text: "Get Quote",
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ],
@@ -120,10 +100,38 @@ class Home extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    HomeScreen(),
-                    AboutUsPage(),
-                    ProjectPage(),
-                    ContactUsPage(),
+                    InteractiveViewer(
+                      scaleEnabled: false,
+                      child: HomeScreen(), // The widget you want to zoom
+                    ),
+                    InteractiveViewer(
+                      panEnabled: true, // Set to false to prevent panning
+                      boundaryMargin: EdgeInsets.all(20),
+                      minScale: 0.5,
+                      maxScale: 4.0,
+                      child: AboutUsPage(), // The widget you want to zoom
+                    ),
+                    InteractiveViewer(
+                      panEnabled: true, // Set to false to prevent panning
+                      boundaryMargin: EdgeInsets.all(20),
+                      minScale: 0.5,
+                      maxScale: 4.0,
+                      child: ProjectPage(), // The widget you want to zoom
+                    ),
+                    InteractiveViewer(
+                      panEnabled: true, // Set to false to prevent panning
+                      boundaryMargin: EdgeInsets.all(20),
+                      minScale: 0.5,
+                      maxScale: 4.0,
+                      child: ContactUsPage(), // The widget you want to zoom
+                    ),
+                    InteractiveViewer(
+                      panEnabled: true, // Set to false to prevent panning
+                      boundaryMargin: EdgeInsets.all(20),
+                      minScale: 0.5,
+                      maxScale: 4.0,
+                      child: Quotepage(), // The widget you want to zoom
+                    ),
                   ],
                 ),
               ),
