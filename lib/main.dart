@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home/aboutuspageweb.dart';
 import 'package:home/contactuspageweb.dart';
 import 'package:home/home.dart';
+import 'package:home/mobilehome.dart';
 import 'package:home/projectpageweb.dart';
 import 'package:home/quotepage.dart';
 
@@ -20,6 +21,91 @@ class MyApp extends StatelessWidget {
 
 class Home extends StatelessWidget {
   const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 700) {
+          return const MobileHome(); // 📱 Mobile UI
+        } else {
+          return const deskviewhome(); // 🖥️ Your current UI
+        }
+      },
+    );
+  }
+}
+
+class MobileHome extends StatefulWidget {
+  const MobileHome({super.key});
+
+  @override
+  State<MobileHome> createState() => _MobileHomeState();
+}
+
+class _MobileHomeState extends State<MobileHome> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    MobileHomeScreen(),
+    AboutUsPage(),
+    ProjectPage(),
+    ContactUsPage(),
+    Quotepage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "SRINACSS ENVIRO PVT LTD",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+        leading: Padding(
+          padding: EdgeInsets.all(5),
+          child: Image.asset("assets/logo.png"),
+        ),
+      ),
+
+      // ✅ SHOW SELECTED PAGE
+      body: _pages[_selectedIndex],
+
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        selectedItemColor: Colors.blueAccent,
+        unselectedItemColor: Colors.black,
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info_outline),
+            label: "About",
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.work), label: "Projects"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.contact_phone),
+            label: "Contact",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.request_quote),
+            label: "Quote",
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class deskviewhome extends StatelessWidget {
+  const deskviewhome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -100,38 +186,11 @@ class Home extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    InteractiveViewer(
-                      scaleEnabled: false,
-                      child: HomeScreen(), // The widget you want to zoom
-                    ),
-                    InteractiveViewer(
-                      panEnabled: true, // Set to false to prevent panning
-                      boundaryMargin: EdgeInsets.all(20),
-                      minScale: 0.5,
-                      maxScale: 4.0,
-                      child: AboutUsPage(), // The widget you want to zoom
-                    ),
-                    InteractiveViewer(
-                      panEnabled: true, // Set to false to prevent panning
-                      boundaryMargin: EdgeInsets.all(20),
-                      minScale: 0.5,
-                      maxScale: 4.0,
-                      child: ProjectPage(), // The widget you want to zoom
-                    ),
-                    InteractiveViewer(
-                      panEnabled: true, // Set to false to prevent panning
-                      boundaryMargin: EdgeInsets.all(20),
-                      minScale: 0.5,
-                      maxScale: 4.0,
-                      child: ContactUsPage(), // The widget you want to zoom
-                    ),
-                    InteractiveViewer(
-                      panEnabled: true, // Set to false to prevent panning
-                      boundaryMargin: EdgeInsets.all(20),
-                      minScale: 0.5,
-                      maxScale: 4.0,
-                      child: Quotepage(), // The widget you want to zoom
-                    ),
+                    HomeScreen(),
+                    AboutUsPage(),
+                    ProjectPage(),
+                    ContactUsPage(),
+                    Quotepage(),
                   ],
                 ),
               ),
