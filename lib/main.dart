@@ -3,6 +3,7 @@ import 'package:home/aboutuspageweb.dart';
 import 'package:home/contactuspageweb.dart';
 import 'package:home/home.dart';
 import 'package:home/mobileaboutuspage.dart';
+import 'package:home/mobilecontactuspage.dart';
 import 'package:home/mobilehome.dart';
 import 'package:home/mobileprojectpage.dart';
 import 'package:home/projectpageweb.dart';
@@ -52,7 +53,7 @@ class _MobileHomeState extends State<MobileHome> {
     MobileHomeScreen(),
     MobileAboutusPage(),
     Mobileprojectpage(),
-    ContactUsPage(),
+    Mobilecontactuspage(),
     Quotepage(),
   ];
 
