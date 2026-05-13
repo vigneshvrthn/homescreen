@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:home/aboutuspageweb.dart';
 import 'package:home/contactuspageweb.dart';
 import 'package:home/home.dart';
+import 'package:home/mobileaboutuspage.dart';
 import 'package:home/mobilehome.dart';
+import 'package:home/mobileprojectpage.dart';
 import 'package:home/projectpageweb.dart';
 import 'package:home/quotepage.dart';
 
@@ -48,8 +50,8 @@ class _MobileHomeState extends State<MobileHome> {
 
   final List<Widget> _pages = [
     MobileHomeScreen(),
-    AboutUsPage(),
-    ProjectPage(),
+    MobileAboutusPage(),
+    Mobileprojectpage(),
     ContactUsPage(),
     Quotepage(),
   ];

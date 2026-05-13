@@ -185,7 +185,7 @@ class AboutUsPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "Managing Directory",
+                              "Managing Director",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500,
