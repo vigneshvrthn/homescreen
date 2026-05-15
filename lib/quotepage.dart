@@ -14,28 +14,35 @@ class _QuotepageState extends State<Quotepage> {
   final TextEditingController _personController = TextEditingController();
 
   String? _selectedService;
-  final _formkey = GlobalKey<FormState>();
 
-  // 🚀 WhatsApp Function
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  // WHATSAPP FUNCTION
   Future<void> sendToWhatsApp() async {
-    final phone = "918220042006"; // 👉 Replace with your WhatsApp number
+    String phone = "918220042006";
 
-    final message =
-        '''
-Company Name: ${_companyname.text}
-Service: $_selectedService
-Phone: ${_phoneController.text}
-No of Person: ${_personController.text}
-''';
+    String message =
+        """
+Company Name : ${_companyname.text}
 
-    final url = Uri.parse(
-      "https://wa.me/$phone?text=${Uri.encodeComponent(message)}",
+Service : $_selectedService
+
+Phone Number : ${_phoneController.text}
+
+No Of Person : ${_personController.text}
+""";
+
+    final Uri url = Uri(
+      scheme: 'https',
+      host: 'wa.me',
+      path: phone,
+      queryParameters: {'text': message},
     );
 
-    if (await canLaunchUrl(url)) {
+    try {
       await launchUrl(url, mode: LaunchMode.externalApplication);
-    } else {
-      throw "Could not launch WhatsApp";
+    } catch (e) {
+      debugPrint("Error : $e");
     }
   }
 
@@ -50,148 +57,215 @@ No of Person: ${_personController.text}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: 400,
-            height: double.maxFinite,
-            child: Column(
-              children: [
-                Text(
-                  "Enter The Details You Need For Your Company",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
-                ),
-                SizedBox(height: 10),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Form(
-                      key: _formkey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // Company Name
-                          TextFormField(
-                            controller: _companyname,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Company Name",
-                            ),
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return "Enter Your Company Name";
-                              }
-                              return null;
-                            },
+      backgroundColor: Colors.grey.shade100,
+
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: Colors.deepPurple,
+        title: const Text(
+          "Get Quote",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Center(
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 450),
+            child: Card(
+              elevation: 12,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(22),
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // TOP TITLE
+                      const Center(
+                        child: Text(
+                          "Enter Your Requirement",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
+                      ),
 
-                          const SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
-                          // Dropdown Service
-                          DropdownButtonFormField<String>(
-                            initialValue: _selectedService,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Select Service",
-                            ),
-                            items: const [
-                              DropdownMenuItem(
-                                value: "Housekeeping",
-                                child: Text("Housekeeping"),
-                              ),
-                              DropdownMenuItem(
-                                value: "Security",
-                                child: Text("Security"),
-                              ),
-                            ],
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedService = value;
-                              });
-                            },
-                            validator: (value) {
-                              if (value == null) {
-                                return "Please select a service";
-                              }
-                              return null;
-                            },
+                      Center(
+                        child: Text(
+                          "Fill the details and contact instantly through WhatsApp",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey.shade700,
                           ),
+                        ),
+                      ),
 
-                          const SizedBox(height: 10),
+                      const SizedBox(height: 30),
 
-                          // Phone Number
-                          TextFormField(
-                            controller: _phoneController,
-                            keyboardType: TextInputType.number,
-                            maxLength: 10,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Phone Number",
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Enter Your Phone Number";
-                              } else if (!RegExp(
-                                r'^[0-9]{10}$',
-                              ).hasMatch(value)) {
-                                return "Enter a valid 10-digit phone number";
-                              }
-                              return null;
-                            },
+                      // COMPANY NAME
+                      TextFormField(
+                        controller: _companyname,
+                        decoration: InputDecoration(
+                          labelText: "Company Name",
+                          prefixIcon: const Icon(Icons.business),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(18),
                           ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Enter Company Name";
+                          }
+                          return null;
+                        },
+                      ),
 
-                          const SizedBox(height: 10),
+                      const SizedBox(height: 20),
 
-                          // Number of Person
-                          TextFormField(
-                            controller: _personController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "No Of Person",
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Enter The Number of Person You Need";
-                              }
-
-                              final number = int.tryParse(value);
-
-                              if (number == null || number <= 0) {
-                                return "Enter a valid number greater than 0";
-                              }
-
-                              return null;
-                            },
+                      // SERVICE DROPDOWN
+                      DropdownButtonFormField<String>(
+                        value: _selectedService,
+                        decoration: InputDecoration(
+                          labelText: "Select Service",
+                          prefixIcon: const Icon(Icons.miscellaneous_services),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(18),
                           ),
-
-                          const SizedBox(height: 10),
-
-                          // Submit Button
-                          ElevatedButton(
-                            onPressed: () async {
-                              if (_formkey.currentState!.validate()) {
-                                await sendToWhatsApp();
-
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      "Form submitted successfully!",
-                                    ),
-                                    backgroundColor: Colors.green,
-                                  ),
-                                );
-                              }
-                            },
-                            child: const Text("Submit"),
+                        ),
+                        items: const [
+                          DropdownMenuItem(
+                            value: "Housekeeping",
+                            child: Text("Housekeeping"),
+                          ),
+                          DropdownMenuItem(
+                            value: "Security",
+                            child: Text("Security"),
+                          ),
+                          DropdownMenuItem(
+                            value: "Facility Management",
+                            child: Text("Facility Management"),
                           ),
                         ],
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedService = value;
+                          });
+                        },
+                        validator: (value) {
+                          if (value == null) {
+                            return "Please Select Service";
+                          }
+                          return null;
+                        },
                       ),
-                    ),
+
+                      const SizedBox(height: 20),
+
+                      // PHONE NUMBER
+                      TextFormField(
+                        controller: _phoneController,
+                        keyboardType: TextInputType.phone,
+                        maxLength: 10,
+                        decoration: InputDecoration(
+                          labelText: "Phone Number",
+                          prefixIcon: const Icon(Icons.phone),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          counterText: "",
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter Phone Number";
+                          }
+
+                          if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
+                            return "Enter Valid 10 Digit Number";
+                          }
+
+                          return null;
+                        },
+                      ),
+
+                      const SizedBox(height: 20),
+
+                      // NUMBER OF PERSON
+                      TextFormField(
+                        controller: _personController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelText: "No Of Person",
+                          prefixIcon: const Icon(Icons.people),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter Number Of Person";
+                          }
+
+                          final number = int.tryParse(value);
+
+                          if (number == null || number <= 0) {
+                            return "Enter Valid Number";
+                          }
+
+                          return null;
+                        },
+                      ),
+
+                      const SizedBox(height: 35),
+
+                      // SUBMIT BUTTON
+                      SizedBox(
+                        width: double.infinity,
+                        height: 58,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                          ),
+                          onPressed: () async {
+                            if (_formkey.currentState!.validate()) {
+                              await sendToWhatsApp();
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Opening WhatsApp..."),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                            }
+                          },
+                          icon: const Icon(Icons.message, color: Colors.white),
+                          label: const Text(
+                            "Send Through WhatsApp",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ),
